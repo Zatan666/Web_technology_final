@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eraser</title>
+
+     <!-- Bootstrap CSS -->
+  
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-eOJMYsd53ii+scO/bJGFsiCZc+5NDVN2yr8+0RDqr0Ql0h+rP48ckxlpbzKgwra6" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js" 
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf" crossorigin="anonymous"></script>
+
+
+    <!-- TH font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Athiti:wght@500&display=swap" rel="stylesheet">
+
+    {% load static %}
+    <link rel="stylesheet" type ="text/css" href="{% static 'style/style_all.css' %}">
+    
+    <audio autoplay id="bgsound" loop="true">
+      <source src="{% static 'audio/sound_1.mp3' %}" type="audio/mp3">
+    </audio>
+
+    <style>
+     .navbar,footer.bottom ,.pagination a:hover,li.active > a{
+    background-color:#41a07f;
+    }
+
+    header > .container b
+ {
+
+    color: #4D9078 ;
+    font-size: 96px;
+
+}
+    .text-center >.container{
+        color: #4D9078;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        height: 300px;
+        width: 100%;  
+        border-radius: 25px;
+        border-radius: 20%;
+
+    }
+    </style>
+</head>
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" >PL</a>
+
+    <div class="collapse navbar-collapse" >
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/project">project</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="/index">Home</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" >products</a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="/product_pen">Writing</a></li>
+            <li><a class="dropdown-item" href="/product_eraser">Eraser</a></li>
+            <li><a class="dropdown-item" href="/product_art">Art</a></li>
+            <li><a class="dropdown-item" href="/product_diy">Diy</a></li>
+          </ul>
+          <li class="nav-item">
+            <a class="nav-link nav-link-3" href="/about">About</a>
+          </li>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<!-- Navbar -->
+
+<!--row-->
+<body>
+  <!--Body-->
+  <!-- head display -->
+  <br>
+  <br>
+  <header class="text-center py-5 mb-5" >
+    <div class="container" >
+      <div class="row h-100 ">
+        <div class="col-md-12 my-auto">
+          <b >{{category}}</b>
+        </div>
+      </div>
+  
+    </div>
+  </header>
+  <!-- head display -->
+  <!-- filter -->
+  <hr>
+  <section >
+    <div class="container " >
+      <div class="row   "  >
+        <div class="col-sm-2">
+          <h5 >You can buy {{ count|length }} items</h5>
+        </div>
+        <div class="col-sm-2 ms-auto">
+          <form action="{% url 'product_eraser' %}">
+          <div class="input-group">
+            <input type="search" class="form-control"placeholder="Search" name="search" >
+            <button class="btn btn-outline-success" type="submit">Go</button>
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>  
+  </section>
+  <hr>
+  <br>
+  <!-- filter -->
+  <body>
+  
+  <!--subcate -->
+  <section>
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-3">
+          <h3 class="my-4">Specific?</h3>
+          <form action="{% url 'product_eraser' %}">
+            
+            <button class="btn btn-outline-dark" type="submit" value="cat1" name="subcat" for="btn-check" >eraser</button>
+            <br>
+            <br>
+            <button class="btn btn-outline-dark" type="submit" value="cat2" name="subcat" for="btn-check" >correction pen</button>
+  
+        </form>
+        </div>
+  <!--subcate -->
+        {%for product in products_list  %}      
+        <div class="col-lg-3">
+          <a href="{{product.link}}" class="custom-card" target="_blank">
+            <div class="card" style="width: 15rem; display: inline-block">
+              <img class="card-img-top" src="{{product.image}}" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">{{product.name}}</h5>
+                <h5 class="card-text">{{product.price}}</h5>
+              </div>
+            </div>
+          </a>
+        </div>
+        {% endfor %}
+    </div>
+    </div>
+  </section>
+  <!-- row  -->
+  
+  <!-- page navigation-->
+  <br>
+  <br>
+  <br>
+  <footer class="page">
+    <section > 
+      <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          {%if products_list.has_previous %}
+          <li>
+          <a href="?{% if sub %}subcat={{sub}}&{% endif %}{% if search_post %}search={{ search_post }}&
+          {% endif %}page={{products_list.previous_page_number}}" class="previous"><span aria-hidden="true">&laquo;</span> </a>
+        </li>
+          {% endif %}        
+  
+          {% for i in page_range %}
+          {% if products_list.number == i %}
+          <li class="active"><a >{{ i }} <span class="sr-only"></span></a></li>
+          {% else %}
+          <li><a href="?{% if sub %}subcat={{sub}}&{% endif %}{% if search_post %}search={{ search_post }}&{% endif %}page={{i}}">{{ i }}</a></li>
+          {% endif %}
+          {% endfor %}
+  
+          {%if products_list.has_next %}
+          <li>
+          <a href="?{% if sub %}subcat={{sub}}&{% endif %}{% if search_post %}search={{ search_post }}&
+          {% endif %}page={{products_list.next_page_number}}" class="next"><span aria-hidden="true">&raquo;</span> </a>
+          {% endif %}
+        </li>
+        </ul>
+      </nav>
+    </section>
+  </footer>
+  <!-- page navigation-->
+  
+  <footer class="bottom" >
+  <br>
+  <br>
+  </footer>
+  </body>
+  </html>

@@ -1,0 +1,74 @@
+.col{
+    padding-right: -50px;
+}
+/* change the brand and text color */
+.navbar .navbar-brand,
+.navbar .navbar-text,
+.navbar .navbar-nav .nav-link {
+    color:rgb(255, 255, 255);
+    font-family: 'Athiti', sans-serif;
+    
+}
+/* change the link color */
+
+
+
+.container >.row >.col-md-12 > b {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.container >.row >.col-sm-2> h5
+{
+    font-family: 'Athiti', sans-serif;
+}
+
+.card-body {
+    background-color: rgb(255, 255, 255);
+    
+}
+.card {
+    border-color: rgb(0, 0, 0);
+}
+
+.navbar .container-fluid ul.dropdown-menu > li > a.dropdown-item ,
+.card-title , .card-text{
+    font-family: 'Athiti', sans-serif;
+
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+}
+
+
+p {
+    font-size: 20px;
+}
+.pagination{
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    transform: translateY(-50%);
+  }
+.card {
+    margin: 30px;
+   
+}
+  
+.pagination a{
+    font-family: "Open Sans", sans-serif;
+    padding: 10px 16px 10px 16px;
+    margin: 8px;
+    text-decoration: none;
+    color: rgb(0, 0, 0);
+    font-weight: 600;
+    position: relative;
+    border-radius: 50%;
+    transition: 0.3s;
+  }
+  
+.pagination a:hover{
+    background: #000000;  
+    color: rgb(255, 255, 255);
+    transition-duration: 0.5s;
+  }
+  
+
